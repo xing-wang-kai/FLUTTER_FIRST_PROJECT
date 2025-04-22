@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_frist_flutter_project/data/task_dao.dart';
 import 'package:my_frist_flutter_project/widgets/show_my_dialog.dart';
+import 'package:uuid/uuid.dart';
 
 import 'level_stars.dart';
 
@@ -8,6 +9,16 @@ class TaskCardContainer extends StatefulWidget {
   final String taskName;
   final String imageSource;
   final int star;
+
+  Map<String, dynamic> toMap(){
+    return{
+      "taskname": this.taskName,
+      "imagesource":  this.imageSource,
+      "difficulty": this.star
+    };
+  }
+
+
 
   const TaskCardContainer(this.taskName, this.imageSource, this.star, {super.key});
   bool isNetWork(){
@@ -22,6 +33,8 @@ class TaskCardContainer extends StatefulWidget {
 
 class _TaskCardContainerState extends State<TaskCardContainer> {
   int level = 0;
+
+
 
   @override
   Widget build(BuildContext context) {

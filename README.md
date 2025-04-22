@@ -24,6 +24,20 @@ npm intall -g json-server
 para rodar o `json-sever` rodar o command 
 
 ```bash
-json server --watch lib/data/db.json
+json-server --watch lib/data/db.json
 ```
+
+caso você deseje pode informar o IP da máquina local com o comand
+
+```bash
+json-server --watch --host 00.00.00.00 lib/data/db.json
+```
+
+O endereço de ip deve ser coletado com o comand (windowns)
+
+```bash
+ipconfig
+```
+
+O IP nescessário está em endereço de  Endereço IPv4. . . . . . . .  . . . . . . . :
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_frist_flutter_project/data/task_dao.dart';
 import 'package:my_frist_flutter_project/data/task_inherited.dart';
+import 'package:my_frist_flutter_project/services/tasks_services.dart';
 import 'package:my_frist_flutter_project/widgets/taks_cards.dart';
 
 class FormScreen extends StatefulWidget {
@@ -137,16 +138,18 @@ class _FormScreenState extends State<FormScreen> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
 
-                        TaskDao().create(
-                          TaskCardContainer(
-                              nameController.text,
-                              imageController.text,
-                              int.parse(difficultyController.text),
-                          )
+                        TaskCardContainer task = TaskCardContainer(
+                          nameController.text,
+                          imageController.text,
+                          int.parse(difficultyController.text),
                         );
+                        TaskDao().create(task);
+
+                        TaskServices service = TaskServices();
+                        bool result = await service.create(task);
 
                         // TaskInherited.of(widget.taskContext).saveNewTask(
                         //   nameController.text,
@@ -156,8 +159,8 @@ class _FormScreenState extends State<FormScreen> {
                         // ScaffoldMessenger.of(context).showSnackBar(
                         //   SnackBar(content: Text("Saving the new task...")),
                         // );
-                        // Navigator.pop(context);
-                        Navigator.of(context).pushNamed("home");
+                        Navigator.pop(context, result);
+                        //Navigator.of(context).pushNamed("home");
                       }
                     },
                     child: Text("Adicionar!"),
