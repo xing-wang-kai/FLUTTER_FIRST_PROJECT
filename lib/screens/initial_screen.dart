@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_frist_flutter_project/data/task_dao.dart';
-import 'package:my_frist_flutter_project/data/task_inherited.dart';
 import 'package:my_frist_flutter_project/screens/form_screen.dart';
 import 'package:my_frist_flutter_project/widgets/taks_cards.dart';
 
@@ -17,7 +16,17 @@ class _InitialScreenState extends State<InitialScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(leading: Container(), title: Text("tasks")),
+      appBar: AppBar(
+        leading: Container(),
+        title: Text("tasks"),
+        actions: [
+          IconButton(onPressed: (){
+            setState(() {
+              print("Refreshing...");
+            });
+          }, icon: Icon(Icons.refresh))
+        ],
+      ),
       body: Padding(
         padding: EdgeInsets.only(top: 8, bottom: 90),
         child: FutureBuilder<List<TaskCardContainer>>(
@@ -31,6 +40,7 @@ class _InitialScreenState extends State<InitialScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      CircularProgressIndicator(),
                       Icon(Icons.downloading, size: 100, color: Colors.green),
                       Text(
                         "Carregando aguarde!!",
@@ -45,6 +55,7 @@ class _InitialScreenState extends State<InitialScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      CircularProgressIndicator(),
                       Icon(Icons.downloading, size: 100, color: Colors.green),
                       Text(
                         "Carregando aguarde!!",
@@ -59,6 +70,7 @@ class _InitialScreenState extends State<InitialScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      CircularProgressIndicator(),
                       Icon(Icons.downloading, size: 100, color: Colors.green),
                       Text(
                         "Carregando aguarde!!",
@@ -123,14 +135,17 @@ class _InitialScreenState extends State<InitialScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (newContext) {
-                return FormScreen(taskContext: context);
-              },
-            ),
-          );
+          Navigator.of(context).pushNamed("form-screen").then((value)=> setState(() {
+            print("RELOADING!!");
+          }));
+          // Navigator.pushReplacement(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (newContext) {
+          //       return FormScreen(taskContext: context);
+          //     },
+          //   ),
+          // )
         },
         child: Icon(Icons.add, size: 40),
       ),

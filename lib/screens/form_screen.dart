@@ -148,15 +148,16 @@ class _FormScreenState extends State<FormScreen> {
                           )
                         );
 
-                        TaskInherited.of(widget.taskContext).saveNewTask(
-                          nameController.text,
-                          imageController.text,
-                          int.parse(difficultyController.text),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text("Saving the new task...")),
-                        );
-                        Navigator.pop(context);
+                        // TaskInherited.of(widget.taskContext).saveNewTask(
+                        //   nameController.text,
+                        //   imageController.text,
+                        //   int.parse(difficultyController.text),
+                        // );
+                        // ScaffoldMessenger.of(context).showSnackBar(
+                        //   SnackBar(content: Text("Saving the new task...")),
+                        // );
+                        // Navigator.pop(context);
+                        Navigator.of(context).pushNamed("home");
                       }
                     },
                     child: Text("Adicionar!"),

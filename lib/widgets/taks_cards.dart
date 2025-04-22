@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_frist_flutter_project/data/task_dao.dart';
+import 'package:my_frist_flutter_project/widgets/show_my_dialog.dart';
 
 import 'level_stars.dart';
 
@@ -99,28 +101,54 @@ class _TaskCardContainerState extends State<TaskCardContainer> {
                         LevelStars(star: widget.star,),
                       ],
                     ),
-                    SizedBox(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            level++;
-                          });
-                        },
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Icon(Icons.add),
-                            Text(
-                              "UP!",
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                              ),
+                    Column(
+                      children: [
+                        SizedBox(
+                          child: ElevatedButton(
+                            onPressed: () {
+                              setState(() {
+                                level++;
+                              });
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Icon(Icons.add),
+                                Text(
+                                  "UP!",
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
+                          ),
                         ),
-                      ),
+                        SizedBox(
+                          child: ElevatedButton(
+                            onLongPress: (){TaskDao().delete(widget.taskName);},
+                            onPressed: () {
+                              showMyDialog(context, widget.taskName);
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Icon(Icons.remove_circle_outlined, color: Colors.red),
+                                Text(
+                                  "DEL",
+                                  style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                   ],
                 ),
