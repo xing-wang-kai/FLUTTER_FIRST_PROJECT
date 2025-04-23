@@ -48,4 +48,27 @@ class TaskServices {
     }
     return tasks;
   }
+
+  Future<bool> update(String id, TaskCardContainer task) async {
+    String jsontask = json.encode(task.toMap());
+    http.Response response = await client.put(
+        Uri.parse("${this.getUrl()}$id"),
+        headers: {"Content-type": "application/json"},
+        body: jsontask);
+
+    if(response.statusCode == 200){
+      return true;
+    }
+    return false;
+  }
+
+  Future<bool> delete(String  id) async {
+    http.Response response = await client.delete(
+        Uri.parse("${this.getUrl()}$id"),
+        headers: {"Content-type": "application/json"});
+    if(response.statusCode == 201){
+      return true;
+    }
+    return false;
+  }
 }

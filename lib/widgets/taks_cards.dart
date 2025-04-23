@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_frist_flutter_project/data/task_dao.dart';
+import 'package:my_frist_flutter_project/services/tasks_services.dart';
 import 'package:my_frist_flutter_project/widgets/show_my_dialog.dart';
 import 'package:uuid/uuid.dart';
 
@@ -33,7 +34,7 @@ class TaskCardContainer extends StatefulWidget {
 
 class _TaskCardContainerState extends State<TaskCardContainer> {
   int level = 0;
-
+  TaskServices services = TaskServices();
 
 
   @override
@@ -149,7 +150,7 @@ class _TaskCardContainerState extends State<TaskCardContainer> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Icon(Icons.remove_circle_outlined, color: Colors.red),
+                                Icon(Icons.delete, color: Colors.red),
                                 Text(
                                   "DEL",
                                   style: TextStyle(

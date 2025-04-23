@@ -1,4 +1,11 @@
 {
+  "users": [
+    {
+      "id": "1111",
+      "email": "teste@teste.com",
+      "password": "123"
+    }
+  ],
   "tasks": [
     {
       "id": "8995",

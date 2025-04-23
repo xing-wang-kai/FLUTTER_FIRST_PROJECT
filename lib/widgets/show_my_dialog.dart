@@ -8,12 +8,19 @@ Future<void> showMyDialog(BuildContext context, String taskName) async {
     barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
-        title: const Text('Realmente eseja deletar?'),
+        title: const Text('DELETAR ESSE CARD?'),
         content: const SingleChildScrollView(
           child: ListBody(
             children: <Widget>[
-              Text('Atenção!', style: TextStyle(color: Colors.red),),
-              Text('Essa ação é permanente você realmente deseja continuar?'),
+              Center(
+                child: Text('Atenção!', style: TextStyle(color: Colors.red)),
+              ),
+              Center(
+                child: Text(
+                  'Essa ação é permanente você realmente deseja continuar?',
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ],
           ),
         ),
