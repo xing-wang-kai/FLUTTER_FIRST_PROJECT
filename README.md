@@ -53,7 +53,7 @@ ___
 # TROUBLESHOOT
 
 ### ERRO COM JSON SERVER AUTH
-    durante a realização desse projeto tive alguns erros com o json-server-auth, algumas vezes tinha mensagens de error e ao rodar --version no terminal não conseguia encontrar a versão corresponde. Então para solucionar o problema precisei instalar as versões especificas do json-server e json-serve-auth
+durante a realização desse projeto tive alguns erros com o json-server-auth, algumas vezes tinha mensagens de error e ao rodar --version no terminal não conseguia encontrar a versão corresponde. Então para solucionar o problema precisei instalar as versões especificas do json-server e json-serve-auth
 
 1. Rodei o command: 
 ````bash
