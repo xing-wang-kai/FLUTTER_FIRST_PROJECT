@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_frist_flutter_project/data/task_dao.dart';
-import 'package:my_frist_flutter_project/data/task_inherited.dart';
 import 'package:my_frist_flutter_project/services/tasks_services.dart';
 import 'package:my_frist_flutter_project/widgets/taks_cards.dart';
 
@@ -17,6 +17,7 @@ class _FormScreenState extends State<FormScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController difficultyController = TextEditingController();
   TextEditingController imageController = TextEditingController();
+
 
   final _formKey = GlobalKey<FormState>();
 
@@ -91,6 +92,7 @@ class _FormScreenState extends State<FormScreen> {
                       onChanged: (text) {
                         setState(() {});
                       },
+
                       controller: imageController,
                       textAlign: TextAlign.center,
                       decoration: InputDecoration(
@@ -149,7 +151,16 @@ class _FormScreenState extends State<FormScreen> {
                         TaskDao().create(task);
 
                         TaskServices service = TaskServices();
-                        bool result = await service.create(task);
+
+                        var box = await Hive.openBox('service_box');
+                        String? token = await box.get("token");
+                        String? email = await box.get("email");
+                        String? userId = await box.get("userId");
+
+                        if(token != null && userId != null){
+                          bool result = await service.create(task: task, token: token, id: userId );
+                          Navigator.pop(context, result);
+                        }
 
                         // TaskInherited.of(widget.taskContext).saveNewTask(
                         //   nameController.text,
@@ -159,7 +170,6 @@ class _FormScreenState extends State<FormScreen> {
                         // ScaffoldMessenger.of(context).showSnackBar(
                         //   SnackBar(content: Text("Saving the new task...")),
                         // );
-                        Navigator.pop(context, result);
                         //Navigator.of(context).pushNamed("home");
                       }
                     },

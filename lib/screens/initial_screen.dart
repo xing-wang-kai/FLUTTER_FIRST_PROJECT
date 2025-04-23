@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:my_frist_flutter_project/services/tasks_services.dart';
 import 'package:my_frist_flutter_project/widgets/taks_cards.dart';
 
@@ -16,30 +17,54 @@ class _InitialScreenState extends State<InitialScreen> {
   TaskServices services = TaskServices();
 
   @override
+  void initState() {
+    refresh();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    this.refresh();
     return Scaffold(
       appBar: AppBar(
-        leading: Container(),
+        // leading: Container(),
         title: Text("tasks"),
         actions: [
-          IconButton(onPressed: (){
-            setState(() {
-              this.refresh();
-              print("Refreshing...");
-            });
-          }, icon: Icon(Icons.refresh))
+          IconButton(
+            onPressed: () {
+              setState(() {
+                this.refresh();
+                print("Refreshing...");
+              });
+            },
+            icon: Icon(Icons.refresh),
+          ),
         ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            ListTile(
+              onTap: () {
+                logout(context);
+              },
+              title: Text("logout"),
+              leading: Icon(Icons.logout),
+            ),
+          ],
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.only(top: 8, bottom: 90),
-        child: ListView.builder(
+        child:
+            (database.isNotEmpty)
+                ? ListView.builder(
                   itemCount: database.length,
                   itemBuilder: (BuildContext context, int index) {
                     final TaskCardContainer task = database[index];
                     return task;
                   },
-                ),
+                )
+                : Center(child: CircularProgressIndicator(color: Colors.pink)),
         // child: FutureBuilder<List<TaskCardContainer>>(
         //   future: TaskDao().findAll(),
         //   builder: (context, snapshot) {
@@ -146,18 +171,16 @@ class _InitialScreenState extends State<InitialScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed("form-screen").then((value){
-
-            if(value != null && value == true){
+          Navigator.of(context).pushNamed("form-screen").then((value) {
+            if (value != null && value == true) {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Saved as Succefull!!"))
+                const SnackBar(content: Text("Saved as Succefull!!")),
               );
             }
 
-            setState((){
-                print("RELOADING!!");
+            setState(() {
+              print("RELOADING!!");
             });
-
           });
           // Navigator.pushReplacement(
           //   context,
@@ -171,18 +194,32 @@ class _InitialScreenState extends State<InitialScreen> {
         child: Icon(Icons.add, size: 40),
       ),
     );
-
   }
 
-  void refresh() async{
+  void refresh() async {
+    var box = await Hive.openBox('service_box');
+    String? token = await box.get("token");
+    String? email = await box.get("email");
+    String? userId = await box.get("userId");
 
-    List<TaskCardContainer> tasks = await services.readAll();
+    if (token != null && userId != null) {
+      await services.readAll(id: userId, token: token).then((
+        List<TaskCardContainer> tasks,
+      ) {
+        setState(() {
+          database = [];
+          for (TaskCardContainer task in tasks) {
+            database.add(task);
+          }
+        });
+      });
+    }
+  }
 
-    setState(() {
-      database = [];
-      for(TaskCardContainer task in tasks){
-        database.add(task);
-      }
+  void logout(BuildContext context) async {
+    await Hive.openBox('service_box').then((box){
+    box.clear();
+    Navigator.pushReplacementNamed(context, "login-screen");
     });
   }
 }

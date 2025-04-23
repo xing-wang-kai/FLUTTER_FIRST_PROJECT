@@ -3,17 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:my_frist_flutter_project/data/task_inherited.dart';
 import 'package:my_frist_flutter_project/screens/form_screen.dart';
 import 'package:my_frist_flutter_project/screens/initial_screen.dart';
-import 'package:my_frist_flutter_project/services/tasks_services.dart';
+import 'package:my_frist_flutter_project/screens/login_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
-  TaskServices services = TaskServices();
-  services.readAll();
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +32,11 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.light,
       // home: TaskInherited(child: InitialScreen()),
-      initialRoute: "home",
+      initialRoute: "login-screen",
       routes: {
         "home": (context) => TaskInherited(child: InitialScreen()),
         "form-screen": (context) => FormScreen(taskContext: context),
+        "login-screen": (context) => LoginScreen(),
       },
       //home: FormScreen()
     );

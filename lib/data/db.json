@@ -1,9 +1,29 @@
 {
   "users": [
     {
-      "id": "1111",
-      "email": "teste@teste.com",
-      "password": "123"
+      "email": "testflutter@gmail.com",
+      "password": "$2a$10$P8qqKM.ZPJoyTgK11asdgOjtzK58StRk77coL2YGDB/kxpNI4Aeoe",
+      "id": "mBVrG3u"
+    },
+    {
+      "email": "flutter@gmail.com",
+      "password": "$2a$10$rveTbOfBi2lqu/ZeNGrX2e.s8/cHahfvb0/UHDg0jsCSVDO/U6j/6",
+      "id": "sPaeVGj"
+    },
+    {
+      "email": "testekai@gmail.com",
+      "password": "$2a$10$AyIj2/lbUnyDxQDgAixlcutECCTH5ihy2u3kFC4MB0wV9V9l45FU.",
+      "id": "I3EkbEF"
+    },
+    {
+      "email": "kaitest@gmail.com",
+      "password": "$2a$10$XOTQlxzyTGcKd0N22v305ORXiiZJi2B3QPHGWMiLzfuSge8VDCVRu",
+      "id": "bVIDfJj"
+    },
+    {
+      "email": "kaitest2@gmail.com",
+      "password": "$2a$10$zvg9HG3nraSJPicpWgBlxODp8qMhVDgu7JDT31OQDnMIvFc90454K",
+      "id": "7leXtN6"
     }
   ],
   "tasks": [
@@ -11,25 +31,36 @@
       "id": "8995",
       "taskname": "salvado na  API",
       "imagesource": "livro.jpg",
-      "difficulty": 3
+      "difficulty": 3,
+      "userId": "mBVrG3u"
     },
     {
       "id": "1587",
       "taskname": "livro mais um",
       "imagesource": "livro.jpg",
-      "difficulty": 3
+      "difficulty": 3,
+      "userId": "bVIDfJj"
     },
     {
       "id": "238c",
       "taskname": "maiss um testes apra salvar",
       "imagesource": "livro.jpg",
-      "difficulty": 5
+      "difficulty": 5,
+      "userId": "I3EkbEF"
     },
     {
       "id": "268e",
       "taskname": "nao e livro",
       "imagesource": "meditar.jpeg",
-      "difficulty": 4
+      "difficulty": 4,
+      "userId": "mBVrG3u"
+    },
+    {
+      "taskname": "nadar",
+      "imagesource": "jogar.jpg",
+      "difficulty": 3,
+      "userId": "mBVrG3u",
+      "id": "iOCUnF8"
     }
   ]
 }

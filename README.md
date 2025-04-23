@@ -2,13 +2,19 @@
 
 Este projeto é referente ao meu estudos com flutter
 
-- usando componentes (widgets)
+O que apreeendi nesse projeto.
+
+- usar widgets
+- usar widgets de formulários
+- manipular formulários
 - funções assincronas
-- banco de dados
-- dados locais
-- dados em memória
-- configurar rotas
-- configurar widgets e ações
+- persistir dados no cash
+- persistir dados em memória
+- persisitr dados web
+- configurar rotas cascata
+- configurar rotas nomeadas
+- autenticação com token
+- tela de login e senha.
 
 ## Getting Started
 
@@ -45,9 +51,19 @@ ___
 ## FLUXO DE AUTENTICAÇÃO
 
 Para usar o fluxo de autenticação esse projeto usa uma json api com o json-server além o json server instalado acima vc precisa instalar o json-server-auth
+
 ````bash
 npm install -g json-server-auth
 ````
+
+para rodar a api faker do json-server-auth é o mesmo método usado para rodar a do json-server, porém no arquivo db.json precisa adicionar a camada user: [] para conseguir simular em desenvolvimento a entrada dos dados de login de um usuário.
+
+```bash
+json-server --watch --host 00.00.00.00 lib/data/db.json
+```
+
+No 00.00.00.00 substituir pelo seu ipv4 pegado com command `ipconfig`.
+
 
 ___
 # TROUBLESHOOT
